@@ -15,8 +15,8 @@ public class SaleItems {
     private int quantity;
 
     @ManyToOne
-    private Sale sale;
+    private Sales sale;
 
     @ManyToOne
-    private Product product;
+    private Products product;
 }
