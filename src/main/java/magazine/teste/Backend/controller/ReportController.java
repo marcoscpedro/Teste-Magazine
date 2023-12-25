@@ -21,9 +21,9 @@ public class ReportController {
         this.reportService = reportService;
     }
 
-    @GetMapping("/stockQuantity")
-    public List<ReportResponse>findAllProductsByStockQuantity(){
-        return reportService.mainReport();
-       }
+    // @GetMapping("/stockQuantity")
+    // public List<ReportResponse>findAllProductsByStockQuantity(){
+    //     return reportService.mainReport();
+    //    }
     
 }

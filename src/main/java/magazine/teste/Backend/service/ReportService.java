@@ -8,7 +8,7 @@ import magazine.teste.Backend.ResponseBody.ReportResponse;
 public interface ReportService {
 
     
-    List<ReportResponse> mainReport();
+    // List<ReportResponse> mainReport();
     
     
 }
