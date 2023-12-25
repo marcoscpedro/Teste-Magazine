@@ -1,23 +1,25 @@
 package magazine.teste.Backend.service;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import magazine.teste.Backend.ResponseBody.ReportResponse;
 import magazine.teste.Backend.model.Product;
-import magazine.teste.Backend.repository.ProductRepository;
+import magazine.teste.Backend.repository.ReportRepository;
 
 @Service
 public class ReportServiceImpl implements ReportService {
     
-    private ProductRepository productRepository;
+    @Autowired
+    private ReportRepository reportRepository;
 
-    public ReportServiceImpl(ProductRepository productRepository){
-        this.productRepository = productRepository;
-    }
+
 
     @Override
-    public Iterable<Product> findAllProductsByStockQuantity(){
-        return productRepository.findAllProductsByStockQuantity();
+    public List<ReportResponse> mainReport(){
+        return reportRepository.mainReport();
     }
-    
 
 }

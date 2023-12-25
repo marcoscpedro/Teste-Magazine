@@ -1,13 +1,8 @@
 package magazine.teste.Backend.model;
 
-import java.util.List;
-
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
-import org.springframework.lang.NonNull;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,18 +19,25 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Valid
     @NotBlank(message = "The name's field can not be empty or null")
     private String name;
 
+    @Valid
     @NotNull(message = "The e-mail's field can not be empty or null")
     private String email; 
 
+    @Valid
     private String cpf;
 
     
     
-    public Customer(){
-        
+    public Customer(){}
+
+    public Customer(String name, String email, String cpf){
+        this.name = name;
+        this.email = email;
+        this.cpf = cpf;
     }
 
      public Long getId() {

@@ -37,6 +37,8 @@ public class SaleItemServiceImpl implements SaleItemService {
         saleItemFocus.setProductId(saleItem.getProductId());
         saleItemFocus.setQuantity(saleItem.getQuantity());
         saleItemFocus.setSaleId(saleItem.getSaleId());
+        saleItemFocus.setProductDiscount(saleItem.getProductDiscount());
+        saleItemFocus.setProductFinalValue(saleItemFocus.getProductFinalValue());
         return saleItemRepository.save(saleItemFocus);
     }
 

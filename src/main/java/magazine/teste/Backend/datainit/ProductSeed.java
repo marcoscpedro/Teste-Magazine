@@ -1,23 +1,23 @@
 package magazine.teste.Backend.datainit;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import jakarta.annotation.PostConstruct;
 import magazine.teste.Backend.model.Product;
 import magazine.teste.Backend.repository.ProductRepository;
 
 @Component
 public class ProductSeed {
     
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
-    @Autowired
     public ProductSeed(ProductRepository productRepository){
         this.productRepository = productRepository;
     }
 
-    @PostConstruct
+    @EventListener(ApplicationReadyEvent.class)
     public void seedDatabase(){
 
         Product product = new Product("Coca Cola", 100, 12.99, 1.45);

@@ -1,9 +1,14 @@
 package magazine.teste.Backend.service;
 
-import magazine.teste.Backend.model.Product;
+import java.util.List;
+
+import magazine.teste.Backend.ResponseBody.ReportResponse;
+
 
 public interface ReportService {
 
-    Iterable<Product>findAllProductsByStockQuantity();
+    
+    List<ReportResponse> mainReport();
+    
     
 }

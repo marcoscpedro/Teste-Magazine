@@ -17,7 +17,7 @@ import magazine.teste.Backend.service.CustomerService;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/customer")
+@RequestMapping("/api/customers")
 public class CustomersController {
     
     @Autowired

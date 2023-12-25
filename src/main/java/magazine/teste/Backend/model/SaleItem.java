@@ -1,12 +1,10 @@
 package magazine.teste.Backend.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+
 
 @Entity
 public class SaleItem {
@@ -15,19 +13,19 @@ public class SaleItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int quantity;
-
-    
-    private Long saleId;
-
-    
+    private double productDiscount;
+    private double productFinalValue;
+    private Long saleId;    
     private Long productId;
 
     public SaleItem(){}
 
-    public SaleItem(int quantity, Long saleId, Long productId){
+    public SaleItem(int quantity, Long saleId, Long productId, double productDiscount, double productFinalValue){
         this.quantity = quantity;
         this.saleId = saleId;
         this.productId = productId;
+        this.productDiscount = productDiscount;
+        this.productFinalValue = productFinalValue;
     }
 
     public int getQuantity() {
@@ -51,5 +49,19 @@ public class SaleItem {
     public void setSaleId(Long saleId) {
         this.saleId = saleId;
     }
+    public double getProductDiscount() {
+        return productDiscount;
+    }
+
+    public void setProductDiscount(double productDiscount) {
+        this.productDiscount = productDiscount;
+    }
     
+    public double getProductFinalValue() {
+        return productFinalValue;
+    }
+
+    public void setProductFinalValue(double productFinalValue) {
+        this.productFinalValue = productFinalValue;
+    }
 }

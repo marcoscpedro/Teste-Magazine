@@ -1,6 +1,9 @@
 package magazine.teste.Backend.service;
 
-import magazine.teste.Backend.model.Product;
+import java.util.List;
+
+import magazine.teste.Backend.RequestBody.SaleItemRequest;
+import magazine.teste.Backend.RequestBody.SellRequest;
 import magazine.teste.Backend.model.Sale;
 import magazine.teste.Backend.model.SaleItem;
 
@@ -8,7 +11,7 @@ public interface SellService {
     
     double calculateSaleValue(SaleItem[] saleitems, double discount);
 
-    boolean compareSalesValueWithCostValue(Sale sale, SaleItem[] saleitems);
+    boolean compareSalesValueWithCostValue(List<SaleItemRequest> saleItems);
 
-    Sale selling(Sale sale, SaleItem[] saleitems);
+    Sale selling(SellRequest sellRequest);
 }

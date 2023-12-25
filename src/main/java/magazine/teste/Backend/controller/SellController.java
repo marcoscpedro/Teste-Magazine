@@ -1,14 +1,18 @@
 package magazine.teste.Backend.controller;
 
+import javax.management.RuntimeErrorException;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import magazine.teste.Backend.RequestBody.SellRequest;
 import magazine.teste.Backend.model.Sale;
-import magazine.teste.Backend.model.SaleItem;
 import magazine.teste.Backend.repository.ProductRepository;
 import magazine.teste.Backend.repository.SaleItemRepository;
 import magazine.teste.Backend.repository.SaleRepository;
@@ -17,7 +21,7 @@ import magazine.teste.Backend.service.SellService;
 import magazine.teste.Backend.service.StockService;
 
 @RestController
-@RequestMapping("/api/sell")
+@RequestMapping("/api/sells")
 public class SellController {
     
     @Autowired
@@ -39,15 +43,19 @@ public class SellController {
         this.saleService = saleService;
         
     }
-
+    
     @PostMapping
-    public Sale selling(@RequestBody Sale sale, @RequestBody SaleItem[] saleitems){
-        stockService.verifyStockQuantity(saleitems);
-        sellService.compareSalesValueWithCostValue(sale, saleitems);
-        Sale currentSale =  sellService.selling(sale, saleitems);
-        double totalBuyValue = sellService.calculateSaleValue(saleitems, sale.getSaleDiscount());
-        currentSale.setTotalSaleValue(totalBuyValue);
-        return saleService.updateSale(currentSale.getId(), currentSale);
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Sale selling(@Valid @RequestBody SellRequest sellRequest){
+        
+            boolean stockValidation = stockService.verifyStockQuantity(sellRequest.getItens());
+            boolean priceValidation = sellService.compareSalesValueWithCostValue(sellRequest.getItens());
+            if (stockValidation == false || priceValidation == false) {
+                throw new RuntimeErrorException(null, "Favor verificar a quantidade e o desconto");       
+            }
+            Sale currentSale = sellService.selling(sellRequest);
+            stockService.stockMovement(sellRequest.getItens());
+            return currentSale;                   
     }
- 
+//  ResponseEntity<SellRequest>
 }

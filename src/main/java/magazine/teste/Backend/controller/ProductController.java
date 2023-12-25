@@ -15,7 +15,7 @@ import magazine.teste.Backend.repository.ProductRepository;
 import magazine.teste.Backend.service.ProductService;
 
 @RestController
-@RequestMapping("/api/product")
+@RequestMapping("/api/products")
 public class ProductController {
     
     @Autowired

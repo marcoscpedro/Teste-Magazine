@@ -1,7 +1,11 @@
 package magazine.teste.Backend.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
+import magazine.teste.Backend.RequestBody.SaleItemRequest;
+import magazine.teste.Backend.RequestBody.SellRequest;
 import magazine.teste.Backend.model.Product;
 import magazine.teste.Backend.model.Sale;
 import magazine.teste.Backend.model.SaleItem;
@@ -34,13 +38,16 @@ public class SellServiceImpl implements SellService {
     }
     
     @Override
-    public boolean compareSalesValueWithCostValue(Sale sale, SaleItem[] saleItems){
+    public boolean compareSalesValueWithCostValue(List<SaleItemRequest> saleItems){
         boolean canContinue = true;
-        for (SaleItem saleItem : saleItems){
+        for (SaleItemRequest saleItem : saleItems){
             Product productSaleItem = productRepository.findById(saleItem.getProductId()).orElse(null);
+            if (productSaleItem == null) {
+                return canContinue = false;
+            }
             double salesValueWithoutDiscountAndMargin = saleItem.getQuantity() * productSaleItem.getCostValue();
             double salesValueWithoutDiscount = salesValueWithoutDiscountAndMargin * productSaleItem.getProfitMargin();
-            double salesValue = salesValueWithoutDiscount * sale.getSaleDiscount();
+            double salesValue = salesValueWithoutDiscount * saleItem.getProductDiscount();
             if (salesValue < productSaleItem.getCostValue()) {
                 canContinue = false;
             }
@@ -49,14 +56,30 @@ public class SellServiceImpl implements SellService {
     }
 
     @Override
-    public Sale selling (Sale sale, SaleItem[] saleItems){
-        Sale newSale = new Sale(0, sale.getSaleDiscount(), sale.getCustomerId());
+    public Sale selling (SellRequest sellRequest){
+        Sale newSale = new Sale(0, sellRequest.getCustomerId());
         Sale currentSale = saleRepository.save(newSale);
+        double totalSaleValue =  createSaleItem(sellRequest, currentSale.getId());
+        Sale finalSale = updateSaleTotalValue(currentSale, totalSaleValue);
+        return finalSale;
+    }
 
-        for (SaleItem saleItem : saleItems){
-            SaleItem savingSaleItem = new SaleItem(saleItem.getQuantity(), currentSale.getId(), saleItem.getProductId());
+    private double createSaleItem (SellRequest sellRequest, Long saleId){
+        double totalBuyValue = 0;
+        for (SaleItemRequest saleItem : sellRequest.getItens()){
+            Product product = productRepository.findById(saleItem.getProductId()).orElse(null);
+            double priceWhitOutDiscount = product.getCostValue() * product.getProfitMargin();
+            double finalPrice = priceWhitOutDiscount * saleItem.getQuantity();
+            SaleItem savingSaleItem = new SaleItem(saleItem.getQuantity(), saleId, saleItem.getProductId(), saleItem.getProductDiscount(), finalPrice);
             saleItemRepository.save(savingSaleItem);
+            totalBuyValue += finalPrice;
         }
-        return currentSale;
+        return totalBuyValue;
+    }
+
+    private Sale updateSaleTotalValue (Sale sale, double totalSaleValue){
+        Sale initiaSale = sale;
+        initiaSale.setTotalSaleValue(totalSaleValue);
+        return saleRepository.save(initiaSale);
     }
 }

@@ -10,8 +10,8 @@ public class CustomerServiceImpl implements CustomerService {
     
     private CustomerRepository customerRepository;
 
-    public CustomerServiceImpl(CustomerRepository costumerRepository){
-        this.customerRepository = costumerRepository;
+    public CustomerServiceImpl(CustomerRepository custumerRepository){
+        this.customerRepository = custumerRepository;
     }
 
     @Override
@@ -20,27 +20,27 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer getCustomerById (Long costumerId) {
-        return customerRepository.findById(costumerId).orElse(null);
+    public Customer getCustomerById (Long custumerId) {
+        return customerRepository.findById(custumerId).orElse(null);
     }
 
     @Override
-    public Customer createCustomer(Customer costumer) {
-        return customerRepository.save(costumer);
+    public Customer createCustomer(Customer custumer) {
+        return customerRepository.save(custumer);
     }
 
     @Override
-    public Customer updateCustomer(Long costumerId, Customer costumer){
-        Customer customerFocus = customerRepository.findById(costumerId).orElse(null);
-        customerFocus.setName(costumer.getName());
-        customerFocus.setEmail(costumer.getEmail());
-        customerFocus.setCpf(costumer.getCpf());
+    public Customer updateCustomer(Long custumerId, Customer custumer){
+        Customer customerFocus = customerRepository.findById(custumerId).orElse(null);
+        customerFocus.setName(custumer.getName());
+        customerFocus.setEmail(custumer.getEmail());
+        customerFocus.setCpf(custumer.getCpf());
         return customerRepository.save(customerFocus);
     }
 
     @Override
-    public void deleteCustomer(Long costumerId){
-        customerRepository.deleteById(costumerId);
+    public void deleteCustomer(Long custumerId){
+        customerRepository.deleteById(custumerId);
     }
 
 

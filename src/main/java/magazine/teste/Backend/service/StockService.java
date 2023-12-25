@@ -1,12 +1,14 @@
 package magazine.teste.Backend.service;
 
-import magazine.teste.Backend.model.Product;
-import magazine.teste.Backend.model.SaleItem;
+import java.util.List;
+
+import magazine.teste.Backend.RequestBody.SaleItemRequest;
+
 
 public interface StockService {
 
-    boolean verifyStockQuantity(SaleItem[] saleItems);
+    boolean verifyStockQuantity(List<SaleItemRequest> saleItems);
 
-    Product stockMovement(Long productId, Product product);
+    void stockMovement(List<SaleItemRequest> saleItems);
     
 }
