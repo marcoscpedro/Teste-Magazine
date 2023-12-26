@@ -26,7 +26,6 @@ public class SaleItem {
     @JoinColumn(name = "productId")
     private Product product;
 
-    public SaleItem(){}
 
     public int getQuantity() {
         return quantity;

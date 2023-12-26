@@ -26,14 +26,7 @@ public class SellController {
     
     @PostMapping
     public Sale selling(@Valid @RequestBody SellDto sellRequest){
-        
-            // boolean stockValidation = stockService.verifyStockQuantity(sellRequest.getItens());
-            // boolean priceValidation = sellService.compareSalesValueWithCostValue(sellRequest.getItens());
-            // if (stockValidation == false || priceValidation == false) {
-            //     throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Favor verificar a quantidade e o desconto");
-            // }
             Sale currentSale = sellService.selling(sellRequest);
-            // stockService.stockMovement(sellRequest.getItens());
             return currentSale;                   
     }
 }
