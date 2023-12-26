@@ -20,15 +20,15 @@ public class ProductSeed {
     @EventListener(ApplicationReadyEvent.class)
     public void seedDatabase(){
 
-        Product product = new Product("Coca Cola", 100, 12.99, 1.45);
-        Product product1 = new Product("Fanta Uva", 15, 7.99, 1.15);
-        Product product2 = new Product("Fanta Laranja", 50, 10.99, 1.30);
-        Product product3 = new Product("Tubaina", 0, 6.99, 1.1);
+        // Product product = new Product("Coca Cola", 100, 12.99, 1.45);
+        // Product product1 = new Product("Fanta Uva", 15, 7.99, 1.15);
+        // Product product2 = new Product("Fanta Laranja", 50, 10.99, 1.30);
+        // Product product3 = new Product("Tubaina", 0, 6.99, 1.1);
 
-        productRepository.save(product);
-        productRepository.save(product1);
-        productRepository.save(product2);
-        productRepository.save(product3);
+        // productRepository.save(product);
+        // productRepository.save(product1);
+        // productRepository.save(product2);
+        // productRepository.save(product3);
     }
 
 }

@@ -7,23 +7,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import magazine.teste.Backend.ResponseBody.ReportResponse;
-import magazine.teste.Backend.service.ReportService;
+import magazine.teste.Backend.controller.dtos.ProductReportDto;
+import magazine.teste.Backend.service.ProductService;
 
 @RestController
 @RequestMapping("/api/reports")
 public class ReportController {
     
     @Autowired
-    private ReportService reportService;
+    private ProductService productService;
 
-    public ReportController(ReportService reportService){
-        this.reportService = reportService;
+    @GetMapping("/products")    
+    public List<ProductReportDto> getProductReport(){
+        return productService.getProductReport();
     }
-
-    // @GetMapping("/stockQuantity")
-    // public List<ReportResponse>findAllProductsByStockQuantity(){
-    //     return reportService.mainReport();
-    //    }
-    
 }

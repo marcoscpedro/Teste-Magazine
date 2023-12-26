@@ -1,7 +1,8 @@
 package magazine.teste.Backend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,22 +13,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import magazine.teste.Backend.model.Customer;
-import magazine.teste.Backend.repository.CustomerRepository;
 import magazine.teste.Backend.service.CustomerService;
-import javax.validation.Valid;
+import magazine.teste.Backend.controller.dtos.CustomerDto;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/customers")
 public class CustomersController {
     
     @Autowired
-    private CustomerRepository customerRepository;
-
     private CustomerService customersService;
 
-    public CustomersController(CustomerService customersService){
-        this.customersService = customersService;
-    }
     
     @GetMapping
     public Iterable<Customer> getAllCustomers(){
@@ -35,19 +31,29 @@ public class CustomersController {
     }
 
     @GetMapping("/{customerId}")
-    public Customer getCustomerById(@PathVariable Long customerId) {
-        return customersService.getCustomerById(customerId);
+    public ResponseEntity<Customer> getCustomerById(@PathVariable Long customerId) {
+        Customer customer = customersService.getCustomerById(customerId);
+        if (customer != null) {
+            return ResponseEntity.ok(customer);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        
     }
 
     @PostMapping
-
-    public Customer createCustomer(@Valid @RequestBody Customer customer) {
-        return customersService.createCustomer(customer);
+    public Customer createCustomer(@Valid @RequestBody CustomerDto customer) {
+        return customersService.createCustomer(customer.toCustomer());
     }
 
     @PutMapping("/{customerId}")
-    public Customer updateCustomer (@PathVariable Long customerId, @RequestBody Customer customers){
-        return customersService.updateCustomer(customerId, customers);
+    public ResponseEntity<Customer> updateCustomer (@PathVariable Long customerId,@Valid @RequestBody CustomerDto customer){
+        Customer updatedCustomer = customersService.updateCustomer(customerId, customer.toCustomer());
+        if (updatedCustomer != null) {
+            return ResponseEntity.ok(updatedCustomer);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 
     @DeleteMapping("/{customerId}")

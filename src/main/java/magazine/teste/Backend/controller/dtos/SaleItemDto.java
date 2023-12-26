@@ -1,6 +1,6 @@
-package magazine.teste.Backend.RequestBody;
+package magazine.teste.Backend.controller.dtos;
 
-public class SaleItemRequest {
+public class SaleItemDto {
     private Long productId;
     private String name;
     private int quantity;

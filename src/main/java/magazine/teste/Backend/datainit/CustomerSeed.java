@@ -20,13 +20,13 @@ public class CustomerSeed {
     @PostConstruct
     public void seedDatabase(){
 
-        Customer customer = new Customer("Marcos", "marcos@gmail.com", "123124");
-        Customer customer1 = new Customer("Pedro", "pedro@gmail.com", "12314124");
-        Customer customer2 = new Customer("Melo", "melo@gmail.com", "11235412");
+        // Customer customer = new Customer("Marcos", "marcos@gmail.com", "123124");
+        // Customer customer1 = new Customer("Pedro", "pedro@gmail.com", "12314124");
+        // Customer customer2 = new Customer("Melo", "melo@gmail.com", "11235412");
 
-        customerRepository.save(customer);
-        customerRepository.save(customer1);
-        customerRepository.save(customer2);
+        // customerRepository.save(customer);
+        // customerRepository.save(customer1);
+        // customerRepository.save(customer2);
 
     }
 

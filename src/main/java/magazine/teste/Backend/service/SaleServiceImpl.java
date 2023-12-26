@@ -1,5 +1,6 @@
 package magazine.teste.Backend.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import magazine.teste.Backend.model.Sale;
@@ -8,11 +9,8 @@ import magazine.teste.Backend.repository.SaleRepository;
 @Service
 public class SaleServiceImpl implements SaleService {
     
+    @Autowired    
     private SaleRepository saleRepository;
-
-    public SaleServiceImpl(SaleRepository saleRepository){
-        this.saleRepository = saleRepository;
-    }
 
     @Override
     public Iterable<Sale> getAllSales(){
@@ -33,7 +31,7 @@ public class SaleServiceImpl implements SaleService {
     public Sale updateSale(Long saleId, Sale sale){
         Sale sale_focus = saleRepository.findById(saleId).orElse(null);
         sale_focus.setTotalSaleValue(sale.getTotalSaleValue());
-        sale_focus.setCustomerId(sale.getCustomerId());
+        sale_focus.setCustomer(sale.getCustomer());
         return saleRepository.save(sale_focus);
     }
 

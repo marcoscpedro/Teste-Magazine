@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+
+  mysql:
+    container_name: magalu-db
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=magalu
+      - MYSQL_DATABASE=magalu
+      - MYSQL_USER=magalu
+      - MYSQL_PASSWORD=magalu
+    ports:
+      - 3306:3306

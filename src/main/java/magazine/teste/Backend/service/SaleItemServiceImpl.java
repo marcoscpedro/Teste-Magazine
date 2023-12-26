@@ -1,5 +1,6 @@
 package magazine.teste.Backend.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import magazine.teste.Backend.model.SaleItem;
@@ -10,11 +11,8 @@ import magazine.teste.Backend.repository.SaleItemRepository;
 @Service
 public class SaleItemServiceImpl implements SaleItemService {
     
+    @Autowired
     private SaleItemRepository saleItemRepository;
-
-    public SaleItemServiceImpl(SaleItemRepository saleItemRepository){
-        this.saleItemRepository = saleItemRepository;
-    }
 
     @Override
     public Iterable<SaleItem> getAllSaleItems(){
@@ -34,9 +32,9 @@ public class SaleItemServiceImpl implements SaleItemService {
     @Override
     public SaleItem updateSaleItem(Long saleItemId, SaleItem saleItem){
         SaleItem saleItemFocus = saleItemRepository.findById(saleItemId).orElse(null);
-        saleItemFocus.setProductId(saleItem.getProductId());
+        saleItemFocus.setProduct(saleItem.getProduct());
         saleItemFocus.setQuantity(saleItem.getQuantity());
-        saleItemFocus.setSaleId(saleItem.getSaleId());
+        saleItemFocus.setSale(saleItem.getSale());
         saleItemFocus.setProductDiscount(saleItem.getProductDiscount());
         saleItemFocus.setProductFinalValue(saleItemFocus.getProductFinalValue());
         return saleItemRepository.save(saleItemFocus);

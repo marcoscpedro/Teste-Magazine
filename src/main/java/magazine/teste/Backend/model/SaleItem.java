@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 
 @Entity
@@ -15,18 +17,16 @@ public class SaleItem {
     private int quantity;
     private double productDiscount;
     private double productFinalValue;
-    private Long saleId;    
-    private Long productId;
+
+    @ManyToOne
+    @JoinColumn(name = "saleId")
+    private Sale sale;    
+
+    @ManyToOne
+    @JoinColumn(name = "productId")
+    private Product product;
 
     public SaleItem(){}
-
-    public SaleItem(int quantity, Long saleId, Long productId, double productDiscount, double productFinalValue){
-        this.quantity = quantity;
-        this.saleId = saleId;
-        this.productId = productId;
-        this.productDiscount = productDiscount;
-        this.productFinalValue = productFinalValue;
-    }
 
     public int getQuantity() {
         return quantity;
@@ -36,19 +36,6 @@ public class SaleItem {
         this.quantity = quantity;
     }
 
-    public Long getProductId() {
-        return productId;
-    }
-    public void setProductId(Long productId) {
-        this.productId = productId;
-    }
-
-    public Long getSaleId() {
-        return saleId;
-    }
-    public void setSaleId(Long saleId) {
-        this.saleId = saleId;
-    }
     public double getProductDiscount() {
         return productDiscount;
     }
@@ -64,4 +51,21 @@ public class SaleItem {
     public void setProductFinalValue(double productFinalValue) {
         this.productFinalValue = productFinalValue;
     }
+
+    public Sale getSale() {
+        return sale;
+    }
+
+    public void setSale(Sale sale) {
+        this.sale = sale;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
 }

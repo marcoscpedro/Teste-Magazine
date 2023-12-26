@@ -2,28 +2,25 @@ package magazine.teste.Backend.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import magazine.teste.Backend.RequestBody.SaleItemRequest;
+import magazine.teste.Backend.controller.dtos.SaleItemDto;
 import magazine.teste.Backend.model.Product;
 import magazine.teste.Backend.repository.ProductRepository;
 
 @Service
 public class StockServiceImpl implements StockService {
 
+    @Autowired
     private ProductRepository productRepository;
 
-    public StockServiceImpl(ProductRepository productRepository){
-        this.productRepository = productRepository;
-
-    }
-
     @Override
-    public boolean verifyStockQuantity(List<SaleItemRequest> saleItems){
+    public boolean verifyStockQuantity(List<SaleItemDto> saleItems){
         boolean canContinue = true;
-        for (SaleItemRequest saleItem : saleItems){
+        for (SaleItemDto saleItem : saleItems){
             Product stockProduct = productRepository.findById(saleItem.getProductId()).orElse(null);
-            if (stockProduct.getStockQuantity() >= saleItem.getQuantity() || stockProduct == null) {
+            if (stockProduct.getStockQuantity() < saleItem.getQuantity() || stockProduct == null) {
                 return canContinue = false;
             }
         }
@@ -31,8 +28,8 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
-    public void stockMovement(List<SaleItemRequest> saleItems){
-        for (SaleItemRequest saleItem : saleItems){
+    public void stockMovement(List<SaleItemDto> saleItems){
+        for (SaleItemDto saleItem : saleItems){
             Product product = productRepository.findById(saleItem.getProductId()).orElse(null);
             int finalStockQuantity = product.getStockQuantity() - saleItem.getQuantity();
             product.setStockQuantity(finalStockQuantity);

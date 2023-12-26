@@ -1,5 +1,6 @@
 package magazine.teste.Backend.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import magazine.teste.Backend.model.Customer;
@@ -7,12 +8,9 @@ import magazine.teste.Backend.repository.CustomerRepository;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
-    
-    private CustomerRepository customerRepository;
 
-    public CustomerServiceImpl(CustomerRepository custumerRepository){
-        this.customerRepository = custumerRepository;
-    }
+    @Autowired
+    private CustomerRepository customerRepository;
 
     @Override
     public Iterable<Customer> getAllCustomers(){
@@ -21,7 +19,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer getCustomerById (Long custumerId) {
-        return customerRepository.findById(custumerId).orElse(null);
+        Customer customer = customerRepository.findById(custumerId).orElse(null);
+        return customer;
     }
 
     @Override
@@ -32,6 +31,9 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer updateCustomer(Long custumerId, Customer custumer){
         Customer customerFocus = customerRepository.findById(custumerId).orElse(null);
+        if (customerFocus == null) {
+            return customerFocus;
+        }
         customerFocus.setName(custumer.getName());
         customerFocus.setEmail(custumer.getEmail());
         customerFocus.setCpf(custumer.getCpf());

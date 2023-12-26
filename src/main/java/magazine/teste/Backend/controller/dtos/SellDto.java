@@ -1,10 +1,10 @@
-package magazine.teste.Backend.RequestBody;
+package magazine.teste.Backend.controller.dtos;
 
 import java.util.List;
 
-public class SellRequest {
+public class SellDto {
     private Long customerId;
-    private List<SaleItemRequest>  itens;
+    private List<SaleItemDto>  itens;
     
     public Long getCustomerId() {
         return customerId;
@@ -12,10 +12,10 @@ public class SellRequest {
     public void setCustomerId(Long customerId) {
         this.customerId = customerId;
     }
-    public List<SaleItemRequest> getItens() {
+    public List<SaleItemDto> getItens() {
         return itens;
     }
-    public void setItens(List<SaleItemRequest> itens) {
+    public void setItens(List<SaleItemDto> itens) {
         this.itens = itens;
     }
 }
