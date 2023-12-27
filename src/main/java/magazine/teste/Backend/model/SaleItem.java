@@ -26,6 +26,13 @@ public class SaleItem {
     @JoinColumn(name = "productId")
     private Product product;
 
+     public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public int getQuantity() {
         return quantity;

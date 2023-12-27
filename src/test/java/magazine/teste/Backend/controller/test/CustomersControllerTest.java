@@ -57,7 +57,7 @@ public class CustomersControllerTest {
 }
     @Test
     public void testGetCustomersById() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/customers/2"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/customers/1"))
             .andExpect(MockMvcResultMatchers.status().isOk());
     }
     @Test
@@ -68,7 +68,7 @@ public class CustomersControllerTest {
 
     @Test
     public void testUpdateCustomer() throws Exception{
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/customers/2")
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/customers/1")
         .contentType(MediaType.APPLICATION_JSON)
         .content("{\"name\": \"Alterou\", \"email\": \"Alterou\", \"cpf\": \"Alterou\"}"))
         .andExpect(MockMvcResultMatchers.status().isOk());  
@@ -76,7 +76,7 @@ public class CustomersControllerTest {
 
     @Test
     public void testUpdateNameFieldCustomer() throws Exception{
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/customers/2")
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/customers/1")
         .contentType(MediaType.APPLICATION_JSON)
         .content("{\"name32\": \"Alterou\", \"email\": \"Alterou\", \"cpf\": \"Alterou\"}"))
         .andExpect(MockMvcResultMatchers.status().isBadRequest());  
@@ -84,7 +84,7 @@ public class CustomersControllerTest {
 
     @Test
     public void testUpdateEmailFieldCustomer() throws Exception{
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/customers/2")
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/customers/1")
         .contentType(MediaType.APPLICATION_JSON)
         .content("{\"name\": \"Alterou\", \"emai434\": \"Alterou\", \"cpf\": \"Alterou\"}"))
         .andExpect(MockMvcResultMatchers.status().isBadRequest());  
@@ -92,7 +92,7 @@ public class CustomersControllerTest {
     
     @Test
     public void testUpdateCpfFieldCustomer() throws Exception{
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/customers/2")
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/customers/1")
         .contentType(MediaType.APPLICATION_JSON)
         .content("{\"name\": \"Alterou\", \"email\": \"Alterou\", \"cpf43\": \"Alterou\"}"))
         .andExpect(MockMvcResultMatchers.status().isBadRequest());  
@@ -108,7 +108,7 @@ public class CustomersControllerTest {
 
     @Test
     public void testDeleteCustomer() throws Exception{
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/customers/1"))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/customers/3"))
         .andExpect(MockMvcResultMatchers.status().isOk());
     }
 }

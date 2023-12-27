@@ -24,7 +24,6 @@ public class CustomersController {
     @Autowired
     private CustomerService customersService;
 
-    
     @GetMapping
     public Iterable<Customer> getAllCustomers(){
         return customersService.getAllCustomers();

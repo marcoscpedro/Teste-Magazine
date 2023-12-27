@@ -46,8 +46,8 @@ public class SellServiceImpl implements SellService {
             }
             double salesValueWithoutDiscountAndMargin = productSaleItem.getCostValue();
             double salesValueWithoutDiscount = salesValueWithoutDiscountAndMargin * productSaleItem.getProfitMargin();
-            double salesValue = salesValueWithoutDiscount * saleItem.getProductDiscount();
-            if (salesValue > productSaleItem.getCostValue()) {
+            double salesValue = salesValueWithoutDiscount - (salesValueWithoutDiscount * saleItem.getProductDiscount());
+            if (salesValue < productSaleItem.getCostValue()) {
                 canContinue = false;
             }
         }
@@ -85,8 +85,7 @@ public class SellServiceImpl implements SellService {
             savingSaleItem.setProduct(product);
             savingSaleItem.setProductDiscount(saleItem.getProductDiscount());
             savingSaleItem.setProductFinalValue(finalPrice);
-            saleItemRepository.save(savingSaleItem);
-            
+                        
             totalBuyValue += finalPrice;
         }
         return totalBuyValue;

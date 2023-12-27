@@ -83,7 +83,7 @@ public class ProductsControllerTest {
 
     @Test
     public void testUpdateProduct() throws Exception{
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/products/2")
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/products/1")
         .contentType(MediaType.APPLICATION_JSON)
         .content("{\"name\": \"Mudou\", \"stockQuantity\": \"232\", \"costValue\": \"15.20\", \"profitMargin\": \" 2.99\" }"))
         .andExpect(MockMvcResultMatchers.status().isOk());  
@@ -91,7 +91,7 @@ public class ProductsControllerTest {
 
     @Test
     public void testNameFieldUpdateProduct() throws Exception{
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/products/2")
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/products/1")
         .contentType(MediaType.APPLICATION_JSON)
         .content("{\"nameds\": \"Mudou\", \"stockQuantity\": \"232\", \"costValue\": \"15.20\", \"profitMargin\": \" 2.99\" }"))
         .andExpect(MockMvcResultMatchers.status().isBadRequest());  
@@ -99,7 +99,7 @@ public class ProductsControllerTest {
 
     @Test
     public void testStockQuantityFieldUpdateProduct() throws Exception{
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/products/2")
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/products/1")
         .contentType(MediaType.APPLICATION_JSON)
         .content("{\"name\": \"Mudou\", \"stockQuantity43\": \"232\", \"costValue\": \"15.20\", \"profitMargin\": \" 2.99\" }"))
         .andExpect(MockMvcResultMatchers.status().isBadRequest());  
@@ -107,7 +107,7 @@ public class ProductsControllerTest {
 
     @Test
     public void testCostValueFieldUpdateProduct() throws Exception{
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/products/2")
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/products/1")
         .contentType(MediaType.APPLICATION_JSON)
         .content("{\"name\": \"Mudou\", \"stockQuantity\": \"232\", \"costValueqw\": \"15.20\", \"profitMargin\": \" 2.99\" }"))
         .andExpect(MockMvcResultMatchers.status().isBadRequest());  
@@ -115,7 +115,7 @@ public class ProductsControllerTest {
 
     @Test
     public void testProfitMarginFieldUpdateProduct() throws Exception{
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/products/2")
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/products/1")
         .contentType(MediaType.APPLICATION_JSON)
         .content("{\"name\": \"Mudou\", \"stockQuantity\": \"232\", \"costValue\": \"15.20\", \"profitMarginsds\": \" 2.99\" }"))
         .andExpect(MockMvcResultMatchers.status().isBadRequest());  
@@ -123,7 +123,7 @@ public class ProductsControllerTest {
 
     @Test
     public void testDeleteProduct() throws Exception{
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/products/1"))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/products/3"))
         .andExpect(MockMvcResultMatchers.status().isOk());
     }
 }

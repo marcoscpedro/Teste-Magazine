@@ -50,5 +50,14 @@ public class Sale {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
+    
+     public List<SaleItem> getSaleItems() {
+        return saleItems;
+    }
+
+    public void setSaleItems(List<SaleItem> saleItems) {
+        this.saleItems = saleItems;
+    }
+
 
 }

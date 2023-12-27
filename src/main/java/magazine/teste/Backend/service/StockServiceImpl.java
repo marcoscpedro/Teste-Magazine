@@ -20,7 +20,7 @@ public class StockServiceImpl implements StockService {
         boolean canContinue = true;
         for (SaleItemDto saleItem : saleItems){
             Product stockProduct = productRepository.findById(saleItem.getProductId()).orElse(null);
-            if (stockProduct.getStockQuantity() < saleItem.getQuantity() || stockProduct == null) {
+            if (stockProduct == null || stockProduct.getStockQuantity() < saleItem.getQuantity() ) {
                 return canContinue = false;
             }
         }
