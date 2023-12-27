@@ -1,33 +1,73 @@
-# Teste Magalu Back-end
-## Dependências
-Para rodar o projeto, é necessario ter instalado as dependencias
+# Teste Magazine
 
-* Java 17.0.9 ou superior
-* Apache Maven 3.6.3 ou superior
+APIs com funcionalidades de cadastro de clientes, produtos com controle de estoque e cálculos de custo e lucro, e que possam ser realizadas vendas para esses clientes.
 
-## GitHub
-O projeto está no link a baixo do github
+## Índice
 
-https://github.com/marcoscpedro/Teste-Magazine.git
+- [Pré-requisitos](#pré-requisitos)
+- [Configuração do Ambiente](#configuração-do-ambiente)
+- [Executando o Projeto](#executando-o-projeto)
+- [Testes](#testes)
+- [Documentação da API](#documentação-da-api)
+- [Contribuição](#contribuição)
+- [Licença](#licença)
 
-## Iniciar Servidor
-Com elas instaladas, você irá rodar o projeto, utilizando qualquer um dos comandos abaixo:
+## Pré-requisitos
+
+Antes de começar, certifique-se de ter instalado em sua máquina:
+
+- [Java](https://www.oracle.com/java/technologies/javase-downloads.html) (Java 11.0.21 ou superior)
+- [Maven](https://maven.apache.org/download.cgi) (Apache Maven 3.6.3 ou superior)
+- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+- [Docker](https://docs.docker.com/engine/install/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
+## Configuração do Ambiente
+
+1. Clone o repositório:
+
+```bash
+git clone https://github.com/marcoscpedro/Teste-Magazine.git
+cd Teste-Magazine
 ```
+    
+
+2. Build do Projeto:
+
+```bash
 mvn clean install
+```    
 
-mvn spring-boot:run
-```
-O comando irá inicializar a aplicação, gerar as tabelas e relacionamentos e também gerar uma seed para alguns iniciais registros.
+## Executando o Projeto
 
-O projeto irá rodar em localhost:8080/api
+1. Foi usado como banco de dados o MySql, que está rodando em uma imagem Docker que está na raiz do projeto. Para subir a imagem, rode o comando abaixo de dentro da pasta do repositório:
 
-## Rodar Carga de Testes
-As funcionalidades do projeto foram possuem uma cobertura de testes que podem sem testados por esse comando.
-```
-./mvnw test
-```
-## Banco de Dados
-Foi usado como banco de dados o MySql, que está rodando nessa imagem Docker que está na raiz do projeto. Para subir a imagem, rode o comando abaixo
-```
+```bash
 sudo docker compose up -d
 ```
+
+2. Execute o aplicativo Spring Boot:
+
+```bash
+mvn spring-boot:run
+```
+
+O comando irá inicializar a aplicação, gerar as tabelas e relacionamentos e também fazer uma carga inicial de dados de clientes e produtos.
+
+
+
+3. Acesse o aplicativo em [http://localhost:8080](http://localhost:8080)
+
+
+## Testes
+
+Para executar os testes, utilize o seguinte comando:
+
+```bash
+mvn test
+```
+
+
+## Documentação da API
+
+A documentação da API é gerada automaticamente e pode ser acessada em  [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)

@@ -15,7 +15,6 @@ import magazine.teste.Backend.model.Sale;
 import magazine.teste.Backend.model.SaleItem;
 import magazine.teste.Backend.repository.CustomerRepository;
 import magazine.teste.Backend.repository.ProductRepository;
-import magazine.teste.Backend.repository.SaleItemRepository;
 import magazine.teste.Backend.repository.SaleRepository;
 
 @Service
@@ -26,9 +25,6 @@ public class SellServiceImpl implements SellService {
 
     @Autowired
     private SaleRepository saleRepository;
-
-    @Autowired
-    private SaleItemRepository saleItemRepository;
 
     @Autowired
     private CustomerRepository customerRepository;

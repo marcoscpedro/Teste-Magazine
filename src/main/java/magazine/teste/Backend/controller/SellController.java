@@ -11,15 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 import magazine.teste.Backend.controller.dtos.SellDto;
 import magazine.teste.Backend.model.Sale;
 import magazine.teste.Backend.service.SellService;
-import magazine.teste.Backend.service.StockService;
+
 
 @RestController
 @RequestMapping("/api/sells")
 public class SellController {
     
-    @Autowired
-    private StockService stockService;
-
     @Autowired
     private SellService sellService;
 
